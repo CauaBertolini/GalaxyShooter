@@ -29,7 +29,7 @@ public class PowerUp : MonoBehaviour
                     player.SpeedBoostPowerUpOn();
                 } 
                 else if (_powerUpId == 2) {
-                    //enable shield boost
+                    player.isShieldActivate = true;
                 }
 
             }

@@ -6,8 +6,10 @@ public class Player : MonoBehaviour
     public bool canTripleShoot = false;
     public bool isSpeedBoostActivate = false; 
 
-    [SerializeField] 
+    public bool isShieldActivate = false;
     public int _lifeHp = 3;
+    [SerializeField]
+    private GameObject _explosionPrefab;
 
     [SerializeField]
     private GameObject _laserPrefab;
@@ -84,9 +86,16 @@ public class Player : MonoBehaviour
 
     public void DamagePlayerLife() 
     {
-        _lifeHp--;
-        if (_lifeHp < 1) {
+        
+        if (!isShieldActivate) {
+            _lifeHp--;
+            if (_lifeHp < 1) {
             Destroy(this.gameObject);
+            Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        } else {
+            isShieldActivate = false;
+        }
+        
         }
     }
 

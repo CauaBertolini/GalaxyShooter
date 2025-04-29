@@ -3,6 +3,9 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     private float _speed = 3.0f;
+
+    [SerializeField]
+    private GameObject _enemyExplosionPrefab;
     void Start()
     {
         
@@ -24,12 +27,18 @@ public class EnemyAI : MonoBehaviour
         if (other.tag == "Player") {
 
             player.DamagePlayerLife();
+            Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
 
         } else if (other.tag == "Laser") {
 
+            if (other.transform.parent != null) {
+                Destroy(other.transform.parent.gameObject);
+            }
             Destroy(other.gameObject);
+            Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
+            
         }
     }
 }
