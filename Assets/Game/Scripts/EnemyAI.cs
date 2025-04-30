@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -27,7 +28,8 @@ public class EnemyAI : MonoBehaviour
         if (other.tag == "Player") {
 
             player.DamagePlayerLife();
-            Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
+            GameObject explosion = Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, 2.2f);
             Destroy(this.gameObject);
 
         } else if (other.tag == "Laser") {
@@ -36,9 +38,11 @@ public class EnemyAI : MonoBehaviour
                 Destroy(other.transform.parent.gameObject);
             }
             Destroy(other.gameObject);
-            Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
+            GameObject explosion = Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, 2.2f);
             Destroy(this.gameObject);
             
         }
     }
+
 }

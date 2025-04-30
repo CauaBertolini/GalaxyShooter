@@ -16,6 +16,7 @@ public class PowerUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player") {
+            
             Player player = other.GetComponent<Player>();
 
             if (player != null) {
@@ -29,7 +30,7 @@ public class PowerUp : MonoBehaviour
                     player.SpeedBoostPowerUpOn();
                 } 
                 else if (_powerUpId == 2) {
-                    player.isShieldActivate = true;
+                    player.EnableShields();
                 }
 
             }
