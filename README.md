@@ -1,1 +1,2 @@
-#Galaxy Shooter Game
+# Galaxy Shooter Game
+### Projeto desenvolvido durante (...)
