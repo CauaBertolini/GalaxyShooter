@@ -10,6 +10,16 @@ public class PowerUp : MonoBehaviour
 
     void Update()
     {
+        if (_powerUpId == 0) {
+            _speed = 4;
+
+        } else if (_powerUpId == 2) {
+            _speed = 5f;
+
+        } else {
+            _speed = 3f;
+            
+        }
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
     }
@@ -22,11 +32,9 @@ public class PowerUp : MonoBehaviour
             if (player != null) {
 
                 if (_powerUpId == 0) {
-                    
                     player.TripleShoPowerUpOn();
                     
                 } else if (_powerUpId == 1) {
-
                     player.SpeedBoostPowerUpOn();
                 } 
                 else if (_powerUpId == 2) {
