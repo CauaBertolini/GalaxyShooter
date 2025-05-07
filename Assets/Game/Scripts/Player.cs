@@ -26,11 +26,19 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float _speed = 7f;
+
+    private UImanager _uiManager;
+
     void Start()
     {
         Debug.Log("X pos: " + transform.position.x + " Y pos: " + transform.position.y + " Z pos: " + transform.position);
         Debug.Log("Player iniciado");
         transform.position = new Vector3(0, 0, 0);
+
+        _uiManager = GameObject.Find("Canvas").GetComponent<UImanager>();
+        if (_uiManager != null) {
+            _uiManager.UpdateLives(_lifeHp);
+        }
     }
 
     // Update is called once per frame
@@ -92,6 +100,7 @@ public class Player : MonoBehaviour
         
         if (!isShieldActivate) {
             _lifeHp--;
+            _uiManager.UpdateLives(_lifeHp);
             if (_lifeHp < 1) {
 
                 Destroy(this.gameObject);
