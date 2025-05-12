@@ -7,9 +7,11 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField]
     private GameObject _enemyExplosionPrefab;
+
+    private UImanager _uiManager;
     void Start()
     {
-        
+        _uiManager = GameObject.Find("Canvas").GetComponent<UImanager>();
     }
 
     void Update()
@@ -34,10 +36,15 @@ public class EnemyAI : MonoBehaviour
 
         } else if (other.tag == "Laser") {
 
+            _uiManager.UpdateScore();
+
             if (other.transform.parent != null) {
                 Destroy(other.transform.parent.gameObject);
             }
+            
+
             Destroy(other.gameObject);
+
             GameObject explosion = Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
             Destroy(explosion, 2.2f);
             Destroy(this.gameObject);

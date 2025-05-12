@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
 
     public bool isShieldActivate = false;
     public int _lifeHp = 3;
+
+    private GameManager _gameManager;
+
     [SerializeField]
     private GameObject _explosionPrefab;
 
@@ -28,6 +31,8 @@ public class Player : MonoBehaviour
     private float _speed = 7f;
 
     private UImanager _uiManager;
+
+    private 
 
     void Start()
     {
@@ -102,7 +107,8 @@ public class Player : MonoBehaviour
             _lifeHp--;
             _uiManager.UpdateLives(_lifeHp);
             if (_lifeHp < 1) {
-
+                
+                _gameManager.EndTheGame();
                 Destroy(this.gameObject);
                 Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
 
