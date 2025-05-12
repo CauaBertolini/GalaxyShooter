@@ -1,23 +1,28 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpawnManagerAI : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject enemyShipPrefab;
 
     [SerializeField]
     private GameObject [] powerUps;
+
+    private GameManager _gameManager;
     void Start()
     {
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    public void StartSpawnCoroutines(){
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnRandomPowerUpRoutine());
     }
 
-
     public IEnumerator SpawnEnemyRoutine() 
     {
-        while(true)
+        while(_gameManager.isGameRunning == true)
         {
             yield return new WaitForSeconds(3.0f);
             SpawnEnemy();
@@ -26,7 +31,7 @@ public class SpawnManagerAI : MonoBehaviour
 
     public IEnumerator SpawnRandomPowerUpRoutine() 
     {
-        while(true) 
+        while(_gameManager.isGameRunning == true) 
         {
             yield return new WaitForSeconds(7.0f);
             SpawnRandomPowerUp();

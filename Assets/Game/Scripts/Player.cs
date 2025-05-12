@@ -9,8 +9,6 @@ public class Player : MonoBehaviour
     public bool isShieldActivate = false;
     public int _lifeHp = 3;
 
-    private GameManager _gameManager;
-
     [SerializeField]
     private GameObject _explosionPrefab;
 
@@ -31,6 +29,9 @@ public class Player : MonoBehaviour
     private float _speed = 7f;
 
     private UImanager _uiManager;
+    private GameManager _gameManager;
+
+    private SpawnManager _spawnManager;
 
     private 
 
@@ -41,6 +42,13 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
 
         _uiManager = GameObject.Find("Canvas").GetComponent<UImanager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+
+        if (_spawnManager != null) {
+            _spawnManager.StartSpawnCoroutines();
+        }
+
         if (_uiManager != null) {
             _uiManager.UpdateLives(_lifeHp);
         }
@@ -107,10 +115,13 @@ public class Player : MonoBehaviour
             _lifeHp--;
             _uiManager.UpdateLives(_lifeHp);
             if (_lifeHp < 1) {
-                
-                _gameManager.EndTheGame();
-                Destroy(this.gameObject);
+
                 Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+                
+
+                _gameManager.EndTheGame();
+
+                Destroy(this.gameObject);
 
             } 
         } else {

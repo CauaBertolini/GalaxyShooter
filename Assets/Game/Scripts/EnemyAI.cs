@@ -30,8 +30,7 @@ public class EnemyAI : MonoBehaviour
         if (other.tag == "Player") {
 
             player.DamagePlayerLife();
-            GameObject explosion = Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
-            Destroy(explosion, 2.2f);
+            Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
 
         } else if (other.tag == "Laser") {

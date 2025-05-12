@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject _playerLivesUI;
-    private Boolean _isGameRunning = false;
+    public Boolean isGameRunning = false;
 
     void Start()
     {
@@ -22,12 +22,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!_isGameRunning) {
+        if (!isGameRunning) {
             if (Input.GetKeyDown(KeyCode.Space)) {
 
-                _isGameRunning = true;
+                isGameRunning = true;
 
-                this.gameObject.SetActive(false);
+                _uiManager.HideTitleScreen();
                 _playerLivesUI.SetActive(true);
 
                 Instantiate(_playerPrefab, new Vector3(0,0,0), quaternion.identity);
@@ -37,10 +37,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void EndTheGame() {
-        _isGameRunning = false;
-        this.gameObject.SetActive(true);
+        _uiManager.ShowTitleScreen();
         _playerLivesUI.SetActive(false);
         _uiManager.ResetScore();
-
+        isGameRunning = false;
     }
 }

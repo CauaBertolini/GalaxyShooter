@@ -8,9 +8,23 @@ public class UImanager : MonoBehaviour
     public int score;
     public Text scoreText;
 
+    public GameObject titleScreen;
+    public GameManager gameManager;
+
     public void UpdateLives(int currentLives)
     {
        livesImageDisplay.sprite = lives[currentLives];
+       if (currentLives < 0) {
+            gameManager.EndTheGame();
+       }
+    }
+
+    public void ShowTitleScreen() {
+        titleScreen.SetActive(true);
+    }
+
+    public void HideTitleScreen() {
+        titleScreen.SetActive(false);
     }
 
     public void UpdateScore()
