@@ -2,12 +2,29 @@ using UnityEngine;
 using System.Collections;
 public class Player : MonoBehaviour
 {
+    private UImanager _uiManager;
+    private GameManager _gameManager;
+    private SpawnManager _spawnManager;
 
     public bool canTripleShoot = false;
     public bool isSpeedBoostActivate = false; 
 
     public bool isShieldActivate = false;
     public int _lifeHp = 3;
+    
+    [SerializeField]
+    private float _speed = 7f;
+
+    [SerializeField]    
+    private float _fireRate = 0.25f;
+    private float _canFire = 0.0f;
+
+    AudioSource[] _audioSources;
+
+    [SerializeField]
+    private AudioClip _defeatClip;
+    [SerializeField]
+    private AudioClip _hitClip;
 
     [SerializeField]
     private GameObject _explosionPrefab;
@@ -20,20 +37,9 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject _shieldGameObject;
-    
-    [SerializeField]    
-    private float _fireRate = 0.25f;
-    private float _canFire = 0.0f;
-
     [SerializeField]
-    private float _speed = 7f;
-
-    private UImanager _uiManager;
-    private GameManager _gameManager;
-
-    private SpawnManager _spawnManager;
-
-    private 
+    private GameObject[] _fireEngines;
+    
 
     void Start()
     {
@@ -52,6 +58,8 @@ public class Player : MonoBehaviour
         if (_uiManager != null) {
             _uiManager.UpdateLives(_lifeHp);
         }
+
+        _audioSources = GetComponents<AudioSource>();
     }
 
     // Update is called once per frame
@@ -66,6 +74,8 @@ public class Player : MonoBehaviour
 
     public void Shoot() {
          if (Time.time > _canFire) {
+
+            _audioSources[0].Play();
             
             if (canTripleShoot) {
                 Instantiate(_trippleShootPrefab, transform.position + new Vector3(-0.476f, 0.027f, 0), Quaternion.identity);
@@ -113,6 +123,15 @@ public class Player : MonoBehaviour
         
         if (!isShieldActivate) {
             _lifeHp--;
+
+            if (_lifeHp == 2) {
+                _fireEngines[0].SetActive(true);
+                AudioSource.PlayClipAtPoint(_hitClip, Camera.main.transform.position);
+            } else if (_lifeHp == 1) {
+                _fireEngines[1].SetActive(true);
+                _audioSources[1].Play();
+            }
+
             _uiManager.UpdateLives(_lifeHp);
             if (_lifeHp < 1) {
 
@@ -121,6 +140,7 @@ public class Player : MonoBehaviour
 
                 _gameManager.EndTheGame();
 
+                AudioSource.PlayClipAtPoint(_defeatClip, Camera.main.transform.position);
                 Destroy(this.gameObject);
 
             } 

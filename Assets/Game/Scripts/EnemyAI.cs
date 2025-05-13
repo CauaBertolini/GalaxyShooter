@@ -3,12 +3,16 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    private UImanager _uiManager;
     private float _speed = 5.0f;
 
     [SerializeField]
     private GameObject _enemyExplosionPrefab;
+    
+    [SerializeField]
+    private AudioClip _explosionClip;
 
-    private UImanager _uiManager;
+    
     void Start()
     {
         _uiManager = GameObject.Find("Canvas").GetComponent<UImanager>();
@@ -31,6 +35,7 @@ public class EnemyAI : MonoBehaviour
 
             player.DamagePlayerLife();
             Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(_explosionClip, Camera.main.transform.position);
             Destroy(this.gameObject);
 
         } else if (other.tag == "Laser") {
@@ -41,7 +46,7 @@ public class EnemyAI : MonoBehaviour
                 Destroy(other.transform.parent.gameObject);
             }
             
-
+            AudioSource.PlayClipAtPoint(_explosionClip, Camera.main.transform.position);
             Destroy(other.gameObject);
 
             GameObject explosion = Instantiate(_enemyExplosionPrefab, transform.position, Quaternion.identity);

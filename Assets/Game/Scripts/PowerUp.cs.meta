@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: ba507270a76361c4296892115a2c8094
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _getShieldPowerUpSound: {instanceID: 0}
+  - _getSpeedPowerUpSound: {instanceID: 0}
+  - _getTrippleShootPowerUpSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

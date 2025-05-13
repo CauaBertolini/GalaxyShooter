@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _playerPrefab;
+    
     private UImanager _uiManager;
+    public Boolean isGameRunning = false;
 
     [SerializeField]
     private GameObject _playerLivesUI;
-    public Boolean isGameRunning = false;
+    [SerializeField]
+    private GameObject _playerPrefab;
+    [SerializeField]
+    private AudioClip _readyToGoClip;
+    
 
     void Start()
     {
@@ -26,6 +30,8 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space)) {
 
                 isGameRunning = true;
+                
+                AudioSource.PlayClipAtPoint(_readyToGoClip, Camera.main.transform.position);
 
                 _uiManager.HideTitleScreen();
                 _playerLivesUI.SetActive(true);
