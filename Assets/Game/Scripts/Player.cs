@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 public class Player : MonoBehaviour
 {
-    private UImanager _uiManager;
+    private UIManager _uiManager;
     private GameManager _gameManager;
     private SpawnManager _spawnManager;
 
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
         Debug.Log("Player iniciado");
         transform.position = new Vector3(0, 0, 0);
 
-        _uiManager = GameObject.Find("Canvas").GetComponent<UImanager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     
-    private UImanager _uiManager;
+    private UIManager _uiManager;
     public Boolean isGameRunning = false;
 
     [SerializeField]
@@ -15,11 +15,14 @@ public class GameManager : MonoBehaviour
     private GameObject _playerPrefab;
     [SerializeField]
     private AudioClip _readyToGoClip;
-    
+
+    private double runingTimeTimer = 0;
+
+    public double lastRuningTimeTimer = 0;    
 
     void Start()
     {
-        _uiManager = GameObject.Find("Canvas").GetComponent<UImanager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _uiManager.ResetScore();
         _playerLivesUI.SetActive(false);
     }
@@ -27,7 +30,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (!isGameRunning) {
-            if (Input.GetKeyDown(KeyCode.Space)) {
+            if (Input.GetKeyDown(KeyCode.P)) {
+                runingTimeTimer = 0;
 
                 isGameRunning = true;
                 
@@ -39,7 +43,10 @@ public class GameManager : MonoBehaviour
                 Instantiate(_playerPrefab, new Vector3(0,0,0), quaternion.identity);
 
             }
-        } 
+        } else {
+            runingTimeTimer = Time.time - lastRuningTimeTimer;
+            _uiManager.UpdateTimer(runingTimeTimer);
+        }
     }
 
     public void EndTheGame() {
@@ -47,5 +54,6 @@ public class GameManager : MonoBehaviour
         _playerLivesUI.SetActive(false);
         _uiManager.ResetScore();
         isGameRunning = false;
+        lastRuningTimeTimer = Time.time;
     }
 }

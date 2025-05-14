@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    private UImanager _uiManager;
+    private UIManager _uiManager;
+
+    [SerializeField]
     private float _speed = 5.0f;
 
     [SerializeField]
@@ -15,13 +17,15 @@ public class EnemyAI : MonoBehaviour
     
     void Start()
     {
-        _uiManager = GameObject.Find("Canvas").GetComponent<UImanager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     void Update()
     {
+        
         transform.Translate(Vector3.down * Time.deltaTime * _speed);
-
+       
+        
         if (transform.position.y <= -6.23f) {
             transform.position = new Vector3(Random.Range(-8.0f, 8.0f), 6.18f, 0);
         }

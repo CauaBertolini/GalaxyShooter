@@ -1,10 +1,12 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    private UIManager _uiManager;
     [SerializeField]
-    private GameObject enemyShipPrefab;
+    private GameObject [] enemyShipPrefab;
 
     [SerializeField]
     private GameObject [] powerUps;
@@ -13,6 +15,8 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     public void StartSpawnCoroutines(){
@@ -22,10 +26,23 @@ public class SpawnManager : MonoBehaviour
 
     public IEnumerator SpawnEnemyRoutine() 
     {
+        double runtimeTimer = 0;
+        double lastRuningtimeTimer = _gameManager.lastRuningTimeTimer;
+
         while(_gameManager.isGameRunning == true)
         {
-            yield return new WaitForSeconds(3.0f);
-            SpawnEnemy();
+            runtimeTimer = Time.time - lastRuningtimeTimer;
+            if (runtimeTimer <= 30) {
+                yield return new WaitForSeconds(3.0f);
+                SpawnEnemy();
+            } else if (runtimeTimer > 30 && runtimeTimer < 60) {
+                yield return new WaitForSeconds(1.5f);
+                SpawnEnemy();
+            } else {
+                yield return new WaitForSeconds(0.7f);
+                SpawnEnemy();
+            }
+            
         }
     } 
 
@@ -40,7 +57,16 @@ public class SpawnManager : MonoBehaviour
     }
     public void SpawnEnemy()
     {
-        Instantiate(enemyShipPrefab, transform.position = new Vector3(Random.Range(-8.75f, 8.75f), Random.Range(5.9f, 10.0f), 0), Quaternion.identity);
+        int n = Random.Range(0, 11);
+
+        Debug.Log(n);
+        if (n <= 9) {
+            n = 0;
+        } else {
+            n = 1;
+        }
+
+        Instantiate(enemyShipPrefab[n], transform.position = new Vector3(Random.Range(-8.75f, 8.75f), Random.Range(5.9f, 10.0f), 0), Quaternion.identity);
     }
 
     public void SpawnRandomPowerUp() 

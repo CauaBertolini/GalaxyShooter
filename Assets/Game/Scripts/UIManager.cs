@@ -1,12 +1,15 @@
+using System;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UImanager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     public Sprite[] lives;
     public Image livesImageDisplay;
     public int score;
     public Text scoreText;
+    public Text timerText;
 
     public GameObject titleScreen;
     public GameManager gameManager;
@@ -27,10 +30,19 @@ public class UImanager : MonoBehaviour
         titleScreen.SetActive(false);
     }
 
+    public void UpdateTimer(double time) {
+         timerText.text = $"TIMER: {time:F4}";
+    }
+
     public void UpdateScore()
     {
-        score += 10;
-        scoreText.text = "SCORE: " + score;
+        if (Time.time < 302) {
+            score += 5;
+            scoreText.text = "SCORE: " + score;
+        } else {
+            score += 10;
+            scoreText.text = "SCORE: " + score;
+        }
 
     }
 
@@ -43,6 +55,7 @@ public class UImanager : MonoBehaviour
     public void ResetScore() 
     {
         score = 0;
+        timerText.text = "";
         scoreText.text = "";
     }
 }
