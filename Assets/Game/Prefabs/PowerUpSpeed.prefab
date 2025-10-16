@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 534001216091762562}
   - component: {fileID: 6275326441138553067}
   - component: {fileID: 2572480144369666116}
+  - component: {fileID: 6951878816043891444}
   m_Layer: 0
   m_Name: PowerUpSpeed
   m_TagString: Untagged
@@ -150,5 +151,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba507270a76361c4296892115a2c8094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _getShieldPowerUpSound: {fileID: 0}
+  _getSpeedPowerUpSound: {fileID: 8300000, guid: d5212d318fa0c4e4696883fd5bd8864d, type: 3}
+  _getTrippleShootPowerUpSound: {fileID: 0}
   _powerUpId: 1
   _speed: 3
+--- !u!95 &6951878816043891444
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5995039608370619436}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9db461313adca3e489301fed1aed07a5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

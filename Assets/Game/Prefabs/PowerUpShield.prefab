@@ -101,6 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba507270a76361c4296892115a2c8094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _getShieldPowerUpSound: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
+  _getSpeedPowerUpSound: {fileID: 0}
+  _getTrippleShootPowerUpSound: {fileID: 0}
   _powerUpId: 2
   _speed: 3
 --- !u!58 &1357709451427765746

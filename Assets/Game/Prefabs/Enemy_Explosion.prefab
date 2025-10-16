@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6110980943273566445}
   - component: {fileID: 1717212158473787391}
   - component: {fileID: -1633305829975818488}
+  - component: {fileID: -1082782891001285202}
   m_Layer: 0
   m_Name: Enemy_Explosion
   m_TagString: Untagged
@@ -123,3 +124,15 @@ SortingGroup:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &-1082782891001285202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910710880388524527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4e6e77f3b0387e47921c686e0e2bb01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
